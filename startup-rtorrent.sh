@@ -7,8 +7,8 @@ RT_UID=${USR_ID:=1000}
 RT_GID=${GRP_ID:=1000}
 
 # update uids and gids
-groupadd -g $RT_GID rtorrent
-useradd -u $RT_UID -g $RT_GID -d /home/rtorrent -m -s /bin/bash rtorrent
+addgroup -g $RT_GID rtorrent
+adduser -u $RT_UID -G rtorrent -h /home/rtorrent -m -s /bin/sh rtorrent
 
 # arrange dirs and configs
 mkdir -p /downloads/.rtorrent/session 
