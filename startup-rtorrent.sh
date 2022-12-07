@@ -11,9 +11,10 @@ groupadd -g $RT_GID rtorrent
 if [ $? != 0 ]; then
 addgroup -g $RT_GID rtorrent
 fi
-useradd -u $RT_UID -g $RT_GID -d /home/rtorrent -m -s /bin/bash rtorrent
+group=$(awk -F: "$ 3==$RT_GID {print $ 1}" /etc/group)
+useradd -u $RT_UID -g $RT_GID -d /home/rtorrent -m -s /bin/ash rtorrent
 if [ $? != 0 ]; then
-adduser -u $RT_UID -G rtorrent -h /home/rtorrent -D -s /bin/ash rtorrent
+adduser -u $RT_UID -G "${group}" -h /home/rtorrent -D -s /bin/ash rtorrent
 fi
 
 # arrange dirs and configs
